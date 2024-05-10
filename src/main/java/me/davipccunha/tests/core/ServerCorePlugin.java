@@ -39,6 +39,7 @@ public class ServerCorePlugin extends JavaPlugin {
                 new EntityExplodeListener(),
                 new FoodLevelChangeListener(),
                 new PlayerEditBookListener(),
+                new PlayerGenerateItemListener(),
                 new PlayerInteractListener(),
                 new WeatherChangeListener(),
 
