@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -16,13 +17,14 @@ import java.util.HashMap;
 
 public class PlayerGenerateItemListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     private void onBlockBreak(BlockBreakEvent event) {
+
         final Player player = event.getPlayer();
         final Block block = event.getBlock();
 
         if (player == null || block == null) return;
-        if (player.getGameMode() == GameMode.CREATIVE) return;
+        if (player.getGameMode().equals(GameMode.CREATIVE)) return;
 
         final Collection<ItemStack> drops = block.getDrops(player.getItemInHand());
         final Location source = block.getLocation();
@@ -32,7 +34,7 @@ public class PlayerGenerateItemListener implements Listener {
         block.setType(Material.AIR);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     private void onEntityDeath(EntityDeathEvent event) {
         final Player player = event.getEntity().getKiller();
         if (player == null) return;

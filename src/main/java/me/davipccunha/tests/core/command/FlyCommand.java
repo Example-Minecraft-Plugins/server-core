@@ -1,5 +1,6 @@
 package me.davipccunha.tests.core.command;
 
+import me.davipccunha.utils.messages.ErrorMessages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,21 +11,21 @@ public class FlyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§cApenas jogadores podem executar este comando.");
+            sender.sendMessage(ErrorMessages.EXECUTOR_NOT_PLAYER.getMessage());
             return false;
         }
 
         final Player player = (Player) sender;
 
         if (!player.hasPermission("essentials.fly")) {
-            player.sendMessage("§cVocê não tem permissão para executar este comando.");
+            player.sendMessage(ErrorMessages.NO_PERMISSION.getMessage());
             return false;
         }
 
         final boolean currentAllowFlight = player.getAllowFlight();
 
         player.setAllowFlight(!currentAllowFlight);
-        player.sendMessage("§aModo voo " + (currentAllowFlight ? "§cdesativado§a" : "ativado") + " com sucesso.");
+        player.sendMessage(String.format("§aModo vôo %s §acom sucesso.", currentAllowFlight ? "§cdesativado" : "ativado"));
 
         return true;
     }

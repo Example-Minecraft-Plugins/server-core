@@ -22,11 +22,11 @@ public class SurvivalBoard extends FastBoard {
     public void updateLines() {
         final String name = this.getPlayer().getName();
         final String prefix = PermissionUtils.getLuckPermsPrefix(this.getPlayer());
-        final double coins = this.plugin.getEconomyAPI().getBalance(name, EconomyType.COINS);
-        final double cash = this.plugin.getEconomyAPI().getBalance(name, EconomyType.CASH);
+        final double coins = this.plugin.getEconomyAPI().getBalance(name.toLowerCase(), EconomyType.COINS);
+        final double cash = this.plugin.getEconomyAPI().getBalance(name.toLowerCase(), EconomyType.CASH);
 
         final int online = this.plugin.getServer().getOnlinePlayers().size();
-        final String ip = "jogar.pluncky.net";
+        final String ip = "jogar.pluncky.com";
 
         this.updateLines(
                 " ",

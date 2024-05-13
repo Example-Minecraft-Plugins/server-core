@@ -1,5 +1,6 @@
 package me.davipccunha.tests.core.command;
 
+import me.davipccunha.utils.messages.ErrorMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,8 +11,8 @@ public class SpawnCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("§cApenas jogadores podem executar este comando.");
+        if (!(sender instanceof Player) && args.length < 1) {
+            sender.sendMessage("§cUso: /spawn <jogador>");
             return true;
         }
 
@@ -20,21 +21,25 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        if (!sender.hasPermission("essentials.forcespawn")) {
-            sender.sendMessage("§cVocê não tem permissão para executar este comando.");
+        final String name = args[0].toLowerCase();
+
+        final boolean self = name.equals(sender.getName().toLowerCase());
+
+        if (!self && !sender.hasPermission("essentials.forcespawn")) {
+            sender.sendMessage(ErrorMessages.NO_PERMISSION.getMessage());
             return true;
         }
 
-        final String name = args[0];
         final Player player = Bukkit.getPlayer(name);
+
         if (player == null) {
-            sender.sendMessage("§cUsuário não encontrado.");
+            sender.sendMessage(ErrorMessages.PLAYER_NOT_FOUND.getMessage());
             return true;
         }
 
-        player.teleport(player.getWorld().getSpawnLocation());
+        player.teleport(Bukkit.getWorld("spawn").getSpawnLocation().clone().add(0.5, 0, 0.5));
 
-        player.sendMessage("§aTeleportado com sucesso para o spawn.");
+        sender.sendMessage(String.format("§a%s foi teleportado com sucesso para o spawn.", self ? "Você" : player.getName()));
 
         return true;
     }

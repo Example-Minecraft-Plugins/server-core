@@ -57,12 +57,16 @@ bukkit {
     author = "Davi C"
 
     commands {
+        register("cores") {
+            description = "Lista todas as cores disponíveis"
+        }
+
         register("fly") {
-            description = "Alterna o modo vôo."
+            description = "Alterna o modo vôo"
         }
 
         register("spawn") {
-            description = "Teleporta o player para o spawn."
+            description = "Teleporta o player para o spawn"
         }
     }
 }

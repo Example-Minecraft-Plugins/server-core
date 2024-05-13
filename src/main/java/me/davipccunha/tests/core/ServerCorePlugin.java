@@ -1,6 +1,7 @@
 package me.davipccunha.tests.core;
 
 import lombok.Getter;
+import me.davipccunha.tests.core.command.CoresCommand;
 import me.davipccunha.tests.core.command.FlyCommand;
 import me.davipccunha.tests.core.command.SpawnCommand;
 import me.davipccunha.tests.core.listener.*;
@@ -9,7 +10,6 @@ import me.davipccunha.tests.core.scoreboard.listener.PlayerTransitListener;
 import me.davipccunha.tests.economy.api.EconomyAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,6 +34,7 @@ public class ServerCorePlugin extends JavaPlugin {
         this.economyAPI = Bukkit.getServicesManager().load(EconomyAPI.class);
 
         this.registerListeners(
+                new AsyncPlayerChatListener(),
                 new BlockPistonListener(),
                 new BlockRedstoneListener(),
                 new EntityExplodeListener(),
@@ -58,6 +59,7 @@ public class ServerCorePlugin extends JavaPlugin {
     }
 
     private void registerCommands() {
+        getCommand("cores").setExecutor(new CoresCommand());
         getCommand("fly").setExecutor(new FlyCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
     }
