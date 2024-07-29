@@ -53,7 +53,7 @@ bukkit {
     main = "me.davipccunha.tests.core.ServerCorePlugin"
     depend = listOf("bukkit-utils")
     softDepend = listOf("economy")
-    description = "Core plugin for a server that does multiple small things such as canceling hunger, canceling weather changes and contain essentials commands."
+    description = "Core plugin for a server that does multiple small things such as canceling hunger, canceling weather changes and registering essentials commands."
     author = "Davi C"
 
     commands {
@@ -67,6 +67,10 @@ bukkit {
 
         register("spawn") {
             description = "Teleporta o player para o spawn"
+        }
+
+        register("give") {
+            description = "Dá um item para o player"
         }
     }
 }

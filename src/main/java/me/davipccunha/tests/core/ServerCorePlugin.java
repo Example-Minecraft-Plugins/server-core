@@ -3,6 +3,7 @@ package me.davipccunha.tests.core;
 import lombok.Getter;
 import me.davipccunha.tests.core.command.CoresCommand;
 import me.davipccunha.tests.core.command.FlyCommand;
+import me.davipccunha.tests.core.command.GiveCommand;
 import me.davipccunha.tests.core.command.SpawnCommand;
 import me.davipccunha.tests.core.listener.*;
 import me.davipccunha.tests.core.scoreboard.handler.SurvivalBoardHandler;
@@ -62,6 +63,7 @@ public class ServerCorePlugin extends JavaPlugin {
         getCommand("cores").setExecutor(new CoresCommand());
         getCommand("fly").setExecutor(new FlyCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("give").setExecutor(new GiveCommand());
     }
 
     private void loadCaches() {
